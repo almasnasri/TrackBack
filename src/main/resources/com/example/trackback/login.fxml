@@ -10,4 +10,6 @@
     <Button text="Login" onAction="#handleLogin"/>
     <Label fx:id="messageLabel" text=""/>
     <Button text="Register" onAction="#openRegisterWindow"/>
+
+
 </VBox>

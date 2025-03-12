@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.trackback.ChoiceController">
+   <children>
+      <Button fx:id="btnChoiceReport" layoutX="136.0" layoutY="151.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="163.0" text="Report Found Item" onAction="#openReportWindow"/>
+      <Button fx:id="btnChoiceView" layoutX="336.0" layoutY="143.0" mnemonicParsing="false" prefHeight="113.0" prefWidth="163.0" text="View Lost Items" onAction="#openViewWindow"/>
+   </children>
+</AnchorPane>

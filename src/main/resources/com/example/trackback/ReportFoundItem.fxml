@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.trackback.ReportFoundItem">
+   <children>
+      <Label layoutX="43.0" layoutY="104.0" text="Your Name :" />
+      <Label layoutX="43.0" layoutY="129.0" text="Phone Number : " />
+      <Label layoutX="29.0" layoutY="168.0" text="Found Item Details : " />
+      <Label layoutX="48.0" layoutY="200.0" text="Location Found :" />
+      <Label layoutX="50.0" layoutY="233.0" text="Date Found : " />
+      <Label layoutX="66.0" layoutY="301.0" text="Picture : " />
+      <Label layoutX="51.0" layoutY="271.0" text="Category : " />
+      <TextField fx:id="txtPhonenum" layoutX="139.0" layoutY="128.0" />
+      <TextField fx:id="txtName" layoutX="118.0" layoutY="99.0" />
+      <TextField fx:id="txtLocation" layoutX="142.0" layoutY="196.0" />
+      <DatePicker fx:id="dateFound" layoutX="126.0" layoutY="231.0" prefHeight="18.0" prefWidth="150.0" />
+      <ComboBox fx:id="comboCategory" layoutX="117.0" layoutY="266.0" prefHeight="18.0" prefWidth="150.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Electronics" />
+               <String fx:value="Clothing" />
+               <String fx:value="Accessories" />
+               <String fx:value="Books" />
+               <String fx:value="Others" />
+            </FXCollections>
+         </items>
+      </ComboBox>
+      <Button fx:id="btnUpload" layoutX="116.0" layoutY="297.0" mnemonicParsing="false" text="Upload Picture" onAction="#handleUpload"/>
+      <Button fx:id="btnSubmit" layoutX="126.0" layoutY="461.0" mnemonicParsing="false" text="Submit" onAction="#handleSubmit"/>
+      <ImageView fx:id="imgItem" fitHeight="106.0" fitWidth="110.0" layoutX="108.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>

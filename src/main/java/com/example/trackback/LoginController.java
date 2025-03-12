@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
@@ -51,6 +52,7 @@ public class LoginController {
                 messageLabel.setText("✅ Login Successful!");
                 messageLabel.setStyle("-fx-text-fill: green;");
                 openDashboard();
+                openChoiceWindow();
             } else {
                 messageLabel.setText("❌ Invalid Username or Password!");
                 messageLabel.setStyle("-fx-text-fill: red;");
@@ -63,7 +65,9 @@ public class LoginController {
     }
 
     private void openDashboard() {
+
         System.out.println("User logged in, redirecting...");
+
     }
 
     @FXML
@@ -87,4 +91,23 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+    @FXML
+    private void openChoiceWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/trackback/choice.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Choice");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // 🚪 Close the login window
+            ((Stage) usernameField.getScene().getWindow()).close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

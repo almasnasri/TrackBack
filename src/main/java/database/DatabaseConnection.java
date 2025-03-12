@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final String URL = "jdbc:mysql://localhost:3306/trackback_db";
+    private static final String URL = "jdbc:mysql://localhost:3306/login";
     private static final String USER = "root";
-    private static final String PASSWORD = "IMFA@almas";
+    private static final String PASSWORD = "BellaNabila05_";
 
     public static Connection getConnection() {
         Connection connection = null;
