@@ -19,6 +19,8 @@ import java.sql.SQLException;
 
 import database.DatabaseConnection;
 
+
+
 public class LoginController {
 
     @FXML
@@ -41,7 +43,7 @@ public class LoginController {
             return;
         }
 
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection("login")) {
             String query = "SELECT * FROM users WHERE username = ? AND password = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, username);

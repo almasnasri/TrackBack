@@ -32,7 +32,7 @@ public class RegisterController {
             return;
         }
 
-        try (Connection connection = DatabaseConnection.getConnection()) {
+        try (Connection connection = DatabaseConnection.getConnection("login")) {
             String checkQuery = "SELECT COUNT(*) FROM users WHERE username = ?";
             PreparedStatement checkStmt = connection.prepareStatement(checkQuery);
             checkStmt.setString(1, username);

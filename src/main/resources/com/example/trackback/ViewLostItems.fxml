@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.trackback.ViewLostItems">
    <children>
-      <Label fx:id="lblInfo" layoutX="235.0" layoutY="175.0" text="Label" />
+      <TableView fx:id="tableView" layoutX="50.0" layoutY="50.0" prefHeight="300.0" prefWidth="500.0">
+         <columns>
+            <TableColumn fx:id="itemNameColumn" text="Item Name" prefWidth="150.0"/>
+            <TableColumn fx:id="locationColumn" text="Location" prefWidth="200.0"/>
+            <TableColumn fx:id="dateColumn" text="Date Found" prefWidth="150.0"/>
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
