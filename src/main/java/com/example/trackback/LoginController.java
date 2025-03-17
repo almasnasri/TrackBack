@@ -96,7 +96,7 @@ public class LoginController {
     @FXML
     private void openChoiceWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/trackback/choice.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TrackBack/choice.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Choice");

@@ -4,8 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,7 +19,7 @@ public class ChoiceController {
     @FXML
     private void openReportWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/trackback/ReportFoundItem.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TrackBack/ReportFoundItem.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("Report Found Item");
@@ -40,7 +38,7 @@ public class ChoiceController {
     @FXML
     private void openViewWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/trackback/ViewLostItems.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TrackBack/ViewLostItems.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.setTitle("View Lost Items");
