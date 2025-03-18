@@ -24,8 +24,8 @@
       <Button fx:id="viewItem4" layoutX="259.0" layoutY="429.0" mnemonicParsing="false" text="View" />
       <Button fx:id="viewItem5" layoutX="439.0" layoutY="431.0" mnemonicParsing="false" text="View" />
       <Button fx:id="viewItem6" layoutX="612.0" layoutY="431.0" mnemonicParsing="false" text="View" />
-      <Button fx:id="prevButton" layoutX="417.0" layoutY="499.0" mnemonicParsing="false" text="&lt;" />
-      <Button fx:id="nextButton" layoutX="479.0" layoutY="499.0" mnemonicParsing="false" text="&gt;" />
+      <Button fx:id="prevButton" layoutX="417.0" layoutY="499.0" mnemonicParsing="false"  onAction="#handlePrev" text="&lt;" />
+      <Button fx:id="nextButton" layoutX="479.0" layoutY="499.0" mnemonicParsing="false"  onAction="#handleNext" text="&gt;" />
    </children>
 </AnchorPane>
 

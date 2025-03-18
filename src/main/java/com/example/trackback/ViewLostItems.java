@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,15 +17,15 @@ import java.util.List;
 public class ViewLostItems {
     @FXML private ImageView ImageView1, ImageView2, ImageView3, ImageView4, ImageView5, ImageView6;
     @FXML private Button viewItem1, viewItem2, viewItem3, viewItem4, viewItem5, viewItem6;
-    @FXML private Button prevButton, nextButton;
+    @FXML public Button prevButton, nextButton;
 
     private List<LostItem> lostItems = new ArrayList<>();
-    private int currentIndex = 0;
+    public int currentPage = 0;
+    private static final int ITEMS_PER_PAGE = 6;
 
-    // Database connection details (UPDATE THESE)
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/reportfounditem";  // Change this
-    private static final String DB_USER = "root";  // Change this
-    private static final String DB_PASSWORD = "BellaNabila05_";  // Change this
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/reportfounditem";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "BellaNabila05_";
 
     public void initialize() {
         fetchLostItemsFromDatabase();
@@ -50,36 +51,76 @@ public class ViewLostItems {
                 );
                 lostItems.add(item);
             }
+            System.out.println("Total items fetched: " + lostItems.size()); // Debugging
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private void updateUI() {
+        System.out.println("Updating UI... Current Page: " + currentPage); // Debugging
+
+        clearUI(); // Kosongkan UI sebelum update
+
         ImageView[] imageViews = {ImageView1, ImageView2, ImageView3, ImageView4, ImageView5, ImageView6};
         Button[] viewButtons = {viewItem1, viewItem2, viewItem3, viewItem4, viewItem5, viewItem6};
 
-        for (int i = 0; i < 6; i++) {
-            if (currentIndex + i < lostItems.size()) {
-                LostItem item = lostItems.get(currentIndex + i);
-                String imagePath = item.getImagePath();
+        int startIndex = currentPage * ITEMS_PER_PAGE;
+        int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, lostItems.size());
 
-                if (imagePath != null && !imagePath.isEmpty()) {
-                    imageViews[i].setImage(new Image("file:" + imagePath));  // Load from local path
-                } else {
-                    imageViews[i].setImage(null);
-                }
+        System.out.println("Displaying items from index " + startIndex + " to " + (endIndex - 1)); // Debugging
 
-                int index = currentIndex + i;
-                viewButtons[i].setOnAction(e -> showItemDetails(lostItems.get(index)));
-            } else {
-                imageViews[i].setImage(null);
-                viewButtons[i].setOnAction(null);
+        for (int i = startIndex, slot = 0; i < endIndex; i++, slot++) {
+            LostItem item = lostItems.get(i);
+            String imagePath = item.getImagePath();
+
+            imageViews[slot].setFitWidth(128);
+            imageViews[slot].setFitHeight(174);
+            imageViews[slot].setPreserveRatio(false);
+
+            if (imagePath != null && !imagePath.isEmpty()) {
+                Image image = new Image("file:" + imagePath,
+                        imageViews[slot].getFitWidth(),
+                        imageViews[slot].getFitHeight(),
+                        false,
+                        true
+                );
+                imageViews[slot].setImage(image);
             }
+
+            // Buat gambar bulat di hujung
+            applyRoundedClip(imageViews[slot], 20, 20);
+
+            // Tetapkan tindakan butang
+            int index = i;
+            viewButtons[slot].setOnAction(e -> showItemDetails(lostItems.get(index)));
+
+            // Pastikan UI ditunjukkan
+            imageViews[slot].setVisible(true);
+            viewButtons[slot].setVisible(true);
         }
 
-        prevButton.setDisable(currentIndex == 0);
-        nextButton.setDisable(currentIndex + 6 >= lostItems.size());
+        // Disable button kalau dah di halaman pertama/terakhir
+        //prevButton.setDisable(currentPage == 0);
+        //nextButton.setDisable((currentPage + 1) * ITEMS_PER_PAGE >= lostItems.size());
+    }
+
+    private void clearUI() {
+        ImageView[] imageViews = {ImageView1, ImageView2, ImageView3, ImageView4, ImageView5, ImageView6};
+        Button[] viewButtons = {viewItem1, viewItem2, viewItem3, viewItem4, viewItem5, viewItem6};
+
+        for (int i = 0; i < ITEMS_PER_PAGE; i++) {
+            imageViews[i].setImage(null);
+            imageViews[i].setVisible(false);
+            viewButtons[i].setVisible(false);
+        }
+    }
+
+    private void applyRoundedClip(ImageView imageView, double arcWidth, double arcHeight) {
+        Rectangle clip = new Rectangle(imageView.getFitWidth(), imageView.getFitHeight());
+        clip.setArcWidth(arcWidth);
+        clip.setArcHeight(arcHeight);
+        imageView.setClip(clip);
     }
 
     private void showItemDetails(LostItem item) {
@@ -96,19 +137,25 @@ public class ViewLostItems {
     }
 
     @FXML
-    private void handleNext() {
-        if (currentIndex + 6 < lostItems.size()) {
-            currentIndex += 6;
+    public void handleNext() {
+        if ((currentPage + 1) * ITEMS_PER_PAGE < lostItems.size()) {
+            currentPage++;
+            System.out.println("Next Page Triggered! New Page: " + currentPage);
             updateUI();
+        } else {
+            System.out.println("Next Page Not Triggered (Already Last Page)");
         }
     }
 
     @FXML
-    private void handlePrev() {
-        if (currentIndex > 0) {
-            currentIndex -= 6;
+    public void handlePrev() {
+        if (currentPage > 0) {
+            currentPage--;
+            System.out.println("Previous Page Triggered! New Page: " + currentPage);
             updateUI();
+        } else {
+            System.out.println("Previous Page Not Triggered (Already First Page)");
         }
     }
-}
 
+}
