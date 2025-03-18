@@ -1,12 +1,19 @@
 package com.example.trackback;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-
+import javafx.stage.Stage;
+import java.util.Optional; // For Optional<ButtonType>
+import javafx.application.Platform; // For Platform.exit()
+import javafx.scene.control.ButtonType;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -18,6 +25,14 @@ public class ViewLostItems {
     @FXML private ImageView ImageView1, ImageView2, ImageView3, ImageView4, ImageView5, ImageView6;
     @FXML private Button viewItem1, viewItem2, viewItem3, viewItem4, viewItem5, viewItem6;
     @FXML public Button prevButton, nextButton;
+
+
+    @FXML
+    private Button buttonLogout;
+
+    @FXML
+    private Button buttonReport;
+
 
     private List<LostItem> lostItems = new ArrayList<>();
     public int currentPage = 0;
@@ -68,7 +83,7 @@ public class ViewLostItems {
         int startIndex = currentPage * ITEMS_PER_PAGE;
         int endIndex = Math.min(startIndex + ITEMS_PER_PAGE, lostItems.size());
 
-        System.out.println("Displaying items from index " + startIndex + " to " + (endIndex - 1)); // Debugging
+        //System.out.println("Displaying items from index " + startIndex + " to " + (endIndex - 1)); // Debugging
 
         for (int i = startIndex, slot = 0; i < endIndex; i++, slot++) {
             LostItem item = lostItems.get(i);
@@ -100,9 +115,6 @@ public class ViewLostItems {
             viewButtons[slot].setVisible(true);
         }
 
-        // Disable button kalau dah di halaman pertama/terakhir
-        //prevButton.setDisable(currentPage == 0);
-        //nextButton.setDisable((currentPage + 1) * ITEMS_PER_PAGE >= lostItems.size());
     }
 
     private void clearUI() {
@@ -140,10 +152,10 @@ public class ViewLostItems {
     public void handleNext() {
         if ((currentPage + 1) * ITEMS_PER_PAGE < lostItems.size()) {
             currentPage++;
-            System.out.println("Next Page Triggered! New Page: " + currentPage);
+            //System.out.println("Next Page Triggered! New Page: " + currentPage);
             updateUI();
         } else {
-            System.out.println("Next Page Not Triggered (Already Last Page)");
+            //System.out.println("Next Page Not Triggered (Already Last Page)");
         }
     }
 
@@ -151,11 +163,49 @@ public class ViewLostItems {
     public void handlePrev() {
         if (currentPage > 0) {
             currentPage--;
-            System.out.println("Previous Page Triggered! New Page: " + currentPage);
+            //System.out.println("Previous Page Triggered! New Page: " + currentPage);
             updateUI();
         } else {
-            System.out.println("Previous Page Not Triggered (Already First Page)");
+            //System.out.println("Previous Page Not Triggered (Already First Page)");
         }
     }
+
+    @FXML
+    private void openReportWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TrackBack/ReportFoundItem.fxml"));
+            Parent root = loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Report Found Item");
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // 🚪 Close the choice window
+            Stage choiceStage = (Stage) buttonReport.getScene().getWindow();
+            choiceStage.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleLogout() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Exit Confirmation");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to close the application?");
+
+        // Set default OK and Cancel buttons
+        alert.getButtonTypes().setAll(ButtonType.OK, ButtonType.CANCEL);
+
+        // Show the alert and wait for user response
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            Platform.exit(); // Close the application
+        }
+    }
+
+
 
 }

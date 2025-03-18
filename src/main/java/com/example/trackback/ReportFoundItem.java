@@ -60,6 +60,30 @@ public class ReportFoundItem {
         }
     }
 
+    private void clearFields() {
+        txtName.clear();
+        txtPhonenum.clear();
+        txtLocation.clear();
+        dateFound.setValue(null);
+        comboCategory.setValue(null);
+        imgItem.setImage(null);
+        selectedImageFile = null;
+    }
+
+    private void switchToChoiceController() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/TrackBack/choice.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) btnSubmit.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
     @FXML
     private void handleSubmit() {
         if (txtName.getText().isEmpty() ||
@@ -91,11 +115,23 @@ public class ReportFoundItem {
 
             addFoundItem(txtName.getText(), txtPhonenum.getText(), txtLocation.getText(), formattedDate, comboCategory.getValue(), imagePath);
 
-            Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
-            successAlert.setTitle("Submission Successful");
-            successAlert.setHeaderText(null);
-            successAlert.setContentText("Found item report submitted successfully!");
-            successAlert.showAndWait();
+            // Show "Report another item?" alert
+            Alert nextActionAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            nextActionAlert.setTitle("Submission Successful");
+            nextActionAlert.setHeaderText(null);
+            nextActionAlert.setContentText("Found item report submitted successfully! Do you want to report another item?");
+
+            ButtonType yesButton = new ButtonType("Yes", ButtonBar.ButtonData.YES);
+            ButtonType noButton = new ButtonType("No", ButtonBar.ButtonData.NO);
+            nextActionAlert.getButtonTypes().setAll(yesButton, noButton);
+
+            Optional<ButtonType> nextAction = nextActionAlert.showAndWait();
+            if (nextAction.isPresent() && nextAction.get() == yesButton) {
+                clearFields(); // Reset fields for new input
+            } else {
+                switchToChoiceController(); // Go back to ChoiceController interface
+            }
+
         }
     }
 
@@ -119,5 +155,6 @@ public class ReportFoundItem {
             System.out.println("❌ Failed to insert into reportfounditem database!");
             e.printStackTrace();
         }
+
     }
 }

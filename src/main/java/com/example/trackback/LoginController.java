@@ -75,7 +75,7 @@ public class LoginController {
     @FXML
     public void openRegisterWindow() {
         try {
-            URL fxmlLocation = getClass().getResource("register.fxml");
+            URL fxmlLocation = getClass().getResource("/com/example/TrackBack/register.fxml");
 
             if (fxmlLocation == null) {
                 System.out.println("❌ Error: FXML file 'register.fxml' not found!");
@@ -88,6 +88,8 @@ public class LoginController {
             stage.setTitle("Register");
             stage.setScene(scene);
             stage.show();
+            ((Stage) usernameField.getScene().getWindow()).close();
+
         } catch (IOException e) {
             System.out.println("❌ Error loading 'register.fxml'!");
             e.printStackTrace();
