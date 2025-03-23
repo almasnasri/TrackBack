@@ -36,7 +36,6 @@ interface ItemDetails {
 }
 
 // Java Record for a concise alternative to LostItem
-record LostItemRecord(String name, Integer phone, String category, String locationFound, String dateFound, String imagePath) {}
 
 // Abstract class for common properties
 abstract class AbstractLostItem implements ItemDetails {

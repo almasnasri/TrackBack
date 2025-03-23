@@ -60,6 +60,8 @@ public class ReportFoundItem {
         }
     }
 
+    record FoundItemRecord(String name, String phone, String location, String date, String category, String imagePath) {}
+
     private void clearFields() {
         txtName.clear();
         txtPhonenum.clear();
@@ -108,12 +110,23 @@ public class ReportFoundItem {
 
         Optional<ButtonType> result = confirmAlert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
-            LocalDate foundDate = dateFound.getValue();
+
+            FoundItemRecord foundItem = new FoundItemRecord(
+                    txtName.getText(),
+                    txtPhonenum.getText(),
+                    txtLocation.getText(),
+                    dateFound.getValue().toString(),
+                    comboCategory.getValue(),
+                    selectedImageFile.getAbsolutePath()
+            );
+
+            addFoundItem(foundItem);
+            /*LocalDate foundDate = dateFound.getValue();
             String formattedDate = foundDate.toString(); // Format YYYY-MM-DD
 
             String imagePath = selectedImageFile.getAbsolutePath(); // Get image file path
 
-            addFoundItem(txtName.getText(), txtPhonenum.getText(), txtLocation.getText(), formattedDate, comboCategory.getValue(), imagePath);
+            addFoundItem(txtName.getText(), txtPhonenum.getText(), txtLocation.getText(), formattedDate, comboCategory.getValue(), imagePath);*/
 
             // Show "Report another item?" alert
             Alert nextActionAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -135,18 +148,18 @@ public class ReportFoundItem {
         }
     }
 
-    private void addFoundItem(String name, String phone, String location, String date, String category, String imagePath) {
+    private void addFoundItem(FoundItemRecord item) {
         String query = "INSERT INTO founditems (Name, phone_number, location_found, date_found, category, image_path) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection("reportfounditem");
              PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setString(1, name);
-            statement.setString(2, phone);
-            statement.setString(3, location);
-            statement.setString(4, date);
-            statement.setString(5, category);
-            statement.setString(6, imagePath);
+            statement.setString(1, item.name());
+            statement.setString(2, item.phone());
+            statement.setString(3, item.location());
+            statement.setString(4, item.date());
+            statement.setString(5, item.category());
+            statement.setString(6, item.imagePath());
 
             statement.executeUpdate();
 

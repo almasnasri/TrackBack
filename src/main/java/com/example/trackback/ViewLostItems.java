@@ -245,6 +245,7 @@ public class ViewLostItems {
     private Button buttonLogout;
 
     private List<LostItem> lostItems = new ArrayList<>();
+
     private int currentPage = 0;
     private static final int ITEMS_PER_PAGE = 6;
 
@@ -256,6 +257,8 @@ public class ViewLostItems {
         this.fetchLostItemsFromDatabase();
         this.updateUI();
     }
+
+
 
     private void fetchLostItemsFromDatabase() {
         this.lostItems.clear();
