@@ -19,8 +19,6 @@ import java.sql.SQLException;
 
 import database.DatabaseConnection;
 
-
-
 public class LoginController {
 
     @FXML
@@ -38,9 +36,7 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            //messageLabel.setText("❌ Please fill in all fields!");
-            //messageLabel.setStyle("-fx-text-fill: red;");
-            showMessageBox("Error", "❌ Please fill in all fields!");
+            showMessageDialog("Error", "❌ Please fill in all fields!");
             return;
         }
 
@@ -52,24 +48,19 @@ public class LoginController {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                //messageLabel.setText("✅ Login Successful!");
-                //messageLabel.setStyle("-fx-text-fill: green;");
-                showMessageBox("Success", "✅ Login Successful!");
+                showMessageDialog("Success", "✅ Login Successful!");
                 openDashboard();
                 openChoiceWindow();
             } else {
-                //messageLabel.setText("❌ Invalid Username or Password!");
-                //messageLabel.setStyle("-fx-text-fill: red;");
-                showMessageBox("Error", "❌ Invalid Username or Password!");
+                showMessageDialog("Error", "❌ Invalid Username or Password!");
             }
-
         } catch (SQLException e) {
-            //messageLabel.setText("❌ Database Error!");
-            showMessageBox("Database Error", "❌ Database Error!");
+            showMessageDialog("Database Error", "❌ Database Error!");
             e.printStackTrace();
         }
     }
-    private void showMessageBox(String title, String message) {
+
+    private void showMessageDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
@@ -77,11 +68,8 @@ public class LoginController {
         alert.showAndWait();
     }
 
-
     private void openDashboard() {
-
         System.out.println("User logged in, redirecting...");
-
     }
 
     @FXML
@@ -107,6 +95,7 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void openChoiceWindow() {
         try {
@@ -117,13 +106,9 @@ public class LoginController {
             stage.setScene(new Scene(root));
             stage.show();
 
-            // 🚪 Close the login window
             ((Stage) usernameField.getScene().getWindow()).close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
-
 }
