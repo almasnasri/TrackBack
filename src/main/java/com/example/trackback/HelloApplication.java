@@ -9,11 +9,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.Connection;
 
+
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 400, 300); // Adjusted size
+        Scene scene = new Scene(fxmlLoader.load(), 747, 481); // Adjusted size
         stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
@@ -33,7 +34,6 @@ public class HelloApplication extends Application {
         } catch (Exception e) {
             System.out.println("❌ Error connecting to databases: " + e.getMessage());
         }
-
         launch();
     }
 }

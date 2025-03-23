@@ -1,28 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Button?>
-<?import javafx.collections.FXCollections?>
+
 <?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.trackback.ReportFoundItem">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="481.0" prefWidth="747.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.trackback.ReportFoundItem">
    <children>
-      <Label layoutX="43.0" layoutY="104.0" text="Your Name :" />
-      <Label layoutX="43.0" layoutY="129.0" text="Phone Number : " />
-      <Label layoutX="29.0" layoutY="168.0" text="Found Item Details : " />
-      <Label layoutX="48.0" layoutY="200.0" text="Location Found :" />
-      <Label layoutX="50.0" layoutY="233.0" text="Date Found : " />
-      <Label layoutX="66.0" layoutY="301.0" text="Picture : " />
-      <Label layoutX="51.0" layoutY="271.0" text="Category : " />
-      <TextField fx:id="txtPhonenum" layoutX="139.0" layoutY="128.0" />
-      <TextField fx:id="txtName" layoutX="118.0" layoutY="99.0" />
-      <TextField fx:id="txtLocation" layoutX="142.0" layoutY="196.0" />
-      <DatePicker fx:id="dateFound" layoutX="126.0" layoutY="231.0" prefHeight="18.0" prefWidth="150.0" />
-      <ComboBox fx:id="comboCategory" layoutX="117.0" layoutY="266.0" prefHeight="18.0" prefWidth="150.0">
+      <ImageView fitHeight="481.0" fitWidth="747.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/Trackback%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="116.0" fitWidth="120.0" layoutX="181.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/outline.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="80.0" layoutY="45.0" text="Your Name :">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
+      <Label layoutX="80.0" layoutY="78.0" text="Phone Number : ">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
+      <Label layoutX="80.0" layoutY="118.0" text="Found Item Details : ">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
+      <Label layoutX="81.0" layoutY="157.0" text="Location Found :">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
+      <Label layoutX="81.0" layoutY="190.0" text="Date Found : ">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
+      <Label layoutX="81.0" layoutY="262.0" text="Picture : ">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
+      <Label layoutX="81.0" layoutY="228.0" text="Category : ">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Label>
+      <TextField fx:id="txtPhonenum" layoutX="182.0" layoutY="74.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 5px;" />
+      <TextField fx:id="txtName" layoutX="182.0" layoutY="41.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 5px;" />
+      <TextField fx:id="txtLocation" layoutX="182.0" layoutY="153.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 5px;" />
+      <DatePicker fx:id="dateFound" layoutX="182.0" layoutY="188.0" prefHeight="18.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 5px; -fx-blend-mode: multiply;" />
+      <ComboBox fx:id="comboCategory" layoutX="182.0" layoutY="223.0" prefHeight="18.0" prefWidth="180.0" style="-fx-background-color: transparent; -fx-border-color: black; -fx-border-radius: 5px;">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Electronics" />
@@ -33,8 +67,19 @@
             </FXCollections>
          </items>
       </ComboBox>
-      <Button fx:id="btnUpload" layoutX="116.0" layoutY="297.0" mnemonicParsing="false" text="Upload Picture" onAction="#handleUpload"/>
-      <Button fx:id="btnSubmit" layoutX="126.0" layoutY="461.0" mnemonicParsing="false" text="Submit" onAction="#handleSubmit"/>
-      <ImageView fx:id="imgItem" fitHeight="106.0" fitWidth="110.0" layoutX="108.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnUpload" layoutX="182.0" layoutY="256.0" mnemonicParsing="false" onAction="#handleUpload" prefHeight="30.0" prefWidth="118.0" style="-fx-background-color: a4987b; -fx-background-radius: 20px;" text="Upload Picture">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Button>
+      <Button fx:id="btnSubmit" layoutX="186.0" layoutY="420.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: a4987b; -fx-background-radius: 20px;" text="Submit">
+         <font>
+            <Font name="Verdana" size="12.0" />
+         </font></Button>
+      <ImageView fx:id="imgItem" fitHeight="106.0" fitWidth="110.0" layoutX="186.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: black;" />
+      <ImageView fitHeight="215.0" fitWidth="221.0" layoutX="452.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../image/targets.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -2,6 +2,7 @@ package com.example.trackback;
 
 import database.DatabaseConnection;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
@@ -45,7 +46,8 @@ public class RegisterController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            messageLabel.setText("❌ Please fill in all fields!");
+            //messageLabel.setText("❌ Please fill in all fields!");
+            showMessageBox("Error","❌ Please fill in all fields!");
             return;
         }
 
@@ -56,7 +58,8 @@ public class RegisterController {
             ResultSet resultSet = checkStmt.executeQuery();
 
             if (resultSet.next() && resultSet.getInt(1) > 0) {
-                messageLabel.setText("⚠️ Username already exists!");
+                //messageLabel.setText("⚠️ Username already exists!");
+                showMessageBox("Error","⚠️ Username already exists! Choose another username");
                 return;
             }
 
@@ -66,16 +69,23 @@ public class RegisterController {
             insertStmt.setString(2, password);
             insertStmt.executeUpdate();
 
-            messageLabel.setText("✅ Registration Successful!");
-
+            showMessageBox("Successful Registration","✅ Registration Successful! Login again at login page");
             // ✅ Close Register Window and Reopen Login
             returnToLogin();
 
         } catch (SQLException e) {
-            messageLabel.setText("❌ Database Error!");
+            showMessageBox("Database Error","❌ Database Error!");
             e.printStackTrace();
         }
     }
+    private void showMessageBox(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     // 🔄 Method to Return to Login
     private void returnToLogin() {
         try {

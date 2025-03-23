@@ -89,8 +89,8 @@ public class ViewLostItems {
             LostItem item = lostItems.get(i);
             String imagePath = item.getImagePath();
 
-            imageViews[slot].setFitWidth(128);
-            imageViews[slot].setFitHeight(174);
+            imageViews[slot].setFitWidth(128); //nk tukar kt sini
+            imageViews[slot].setFitHeight(150); //nk tukar sini
             imageViews[slot].setPreserveRatio(false);
 
             if (imagePath != null && !imagePath.isEmpty()) {

@@ -38,8 +38,9 @@ public class LoginController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            messageLabel.setText("❌ Please fill in all fields!");
-            messageLabel.setStyle("-fx-text-fill: red;");
+            //messageLabel.setText("❌ Please fill in all fields!");
+            //messageLabel.setStyle("-fx-text-fill: red;");
+            showMessageBox("Error", "❌ Please fill in all fields!");
             return;
         }
 
@@ -51,20 +52,31 @@ public class LoginController {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                messageLabel.setText("✅ Login Successful!");
-                messageLabel.setStyle("-fx-text-fill: green;");
+                //messageLabel.setText("✅ Login Successful!");
+                //messageLabel.setStyle("-fx-text-fill: green;");
+                showMessageBox("Success", "✅ Login Successful!");
                 openDashboard();
                 openChoiceWindow();
             } else {
-                messageLabel.setText("❌ Invalid Username or Password!");
-                messageLabel.setStyle("-fx-text-fill: red;");
+                //messageLabel.setText("❌ Invalid Username or Password!");
+                //messageLabel.setStyle("-fx-text-fill: red;");
+                showMessageBox("Error", "❌ Invalid Username or Password!");
             }
 
         } catch (SQLException e) {
-            messageLabel.setText("❌ Database Error!");
+            //messageLabel.setText("❌ Database Error!");
+            showMessageBox("Database Error", "❌ Database Error!");
             e.printStackTrace();
         }
     }
+    private void showMessageBox(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     private void openDashboard() {
 
