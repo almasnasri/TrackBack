@@ -2,7 +2,7 @@
 
 TrackBack is a JavaFX-based desktop application designed to help users report and track lost and found items. The application provides an intuitive interface for users to register, log in, report found items with images, and browse through a gallery of lost items.
 
-## 🎯 Features
+##  Features
 
 - **User Authentication**
   - Secure user registration and login system
@@ -27,7 +27,7 @@ TrackBack is a JavaFX-based desktop application designed to help users report an
   - Intuitive navigation
   - Confirmation dialogs for important actions
 
-## 🛠️ Technologies Used
+##  Technologies Used
 
 - **Java** - Core programming language
 - **JavaFX 23.0.2** - GUI framework
@@ -37,7 +37,7 @@ TrackBack is a JavaFX-based desktop application designed to help users report an
 - **Maven** - Build automation and dependency management
 - **JDBC** - Database connectivity
 
-## 📋 Prerequisites
+##  Prerequisites
 
 Before running this application, ensure you have the following installed:
 
@@ -46,13 +46,13 @@ Before running this application, ensure you have the following installed:
 - **MySQL Server 8.0+**
 - **MySQL Connector/J** (included via Maven dependency)
 
-## 🚀 How to Run
+##  How to Run
 
 1. Make sure MySQL is running and set up the databases (`login` and `reportfounditem`)
 2. Update your database username and password in `DatabaseConnection.java`
 3. Run the app: `mvn clean javafx:run`
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 TrackBack/
@@ -82,7 +82,7 @@ TrackBack/
 └── README.md                                   # This file
 ```
 
-## 💻 Usage
+##  Usage
 
 1. **Launch the Application**
    - Run the application using Maven or your IDE
@@ -115,7 +115,7 @@ TrackBack/
 6. **Logout**
    - Click the logout button to exit the application
 
-## 🔧 Configuration
+##  Configuration
 
 ### Database Connection
 
@@ -129,7 +129,7 @@ Modify `DatabaseConnection.java` to change database connection settings.
 
 If you encounter module path issues, ensure JavaFX is properly configured in your IDE or use the Maven JavaFX plugin.
 
-## 🧪 Testing
+##  Testing
 
 The project includes JUnit 5 for testing. Run tests with:
 
@@ -137,32 +137,9 @@ The project includes JUnit 5 for testing. Run tests with:
 mvn test
 ```
 
-## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
-## 📝 License
 
-This project is open source and available under the [MIT License](LICENSE).
 
-## 👤 Author
-
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-
-## 🙏 Acknowledgments
-
-- JavaFX community for excellent documentation
-- MySQL for robust database management
-- All contributors who have helped improve this project
-
----
-
-⭐ If you find this project helpful, please consider giving it a star!
 
